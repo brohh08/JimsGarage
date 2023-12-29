@@ -5,7 +5,7 @@ services:
     environment:
       - POSTGRES_USER=keycloak
       - POSTGRES_DB=keycloak
-      - POSTGRES_PASSWORD=SUPERsecret
+      - POSTGRES_PASSWORD=Homecube2008!
     volumes:
       - '/home/ubuntu/docker/keycloak/postgresql_data:/var/lib/postgresql/data'
     networks:
@@ -20,7 +20,7 @@ services:
     environment:
       - KC_PROXY_ADDRESS_FORWARDING=true
       - KC_HOSTNAME_STRICT=false
-      - KC_HOSTNAME=keycloak.jimsgarage.co.uk
+      - KC_HOSTNAME=sso.broha.net
       - KC_PROXY=edge
       - KC_HTTP_ENABLED=true
       - DB=keycloak
@@ -28,21 +28,21 @@ services:
       - DB_USERNAME=keycloak
       - DB_PASSWORD=SUPERsecret
       - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=password
+      - KEYCLOAK_ADMIN_PASSWORD=Homecube2008!
     networks:
       proxy:
       keycloak:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.keycloak.entrypoints=http"
-      - "traefik.http.routers.keycloak.rule=Host(`keycloak.yourdomain.com`)"
+      - "traefik.http.routers.keycloak.rule=Host(`sso.broha.net`)"
       - "traefik.http.middlewares.keycloak-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.routers.keycloak.middlewares=keycloak-https-redirect"
       - "traefik.http.routers.keycloak-secure.entrypoints=https"
-      - "traefik.http.routers.keycloak-secure.rule=Host(`keycloak.yourdomain.com`)"
+      - "traefik.http.routers.keycloak-secure.rule=Host(`sso.broha.net`)"
       - "traefik.http.routers.keycloak-secure.tls=true"
       - "traefik.http.routers.keycloak-secure.service=keycloak"
-      - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+      - "traefik.http.services.keycloak.loadbalancer.server.port=443"
       - "traefik.docker.network=proxy"
 
 networks:
